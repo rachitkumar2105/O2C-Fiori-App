@@ -2,7 +2,7 @@
   "name": "globaltrade-o2c-fiori",
   "version": "1.0.0",
   "description": "Order-to-Cash SAP Fiori Application for GlobalTrade Enterprises",
-  "author": "Student",
+  "author": "Rachit Kumar",
   "license": "Unlicense",
   "scripts": {
     "start": "ui5 serve",
