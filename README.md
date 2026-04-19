@@ -63,9 +63,9 @@ O2C-Fiori-App/
 
 | Field | Value |
 | :--- | :--- |
-| **Name** | Rachit Kumar |
-| **Roll Number** | **[INSERT YOUR ROLL NO. HERE]** |
-| **Program** | SAP Fiori Capstone 2025-2026 |
+| **Name** | Rachit Kumar Singh |
+| **Roll Number** | 2305555 |
+| **Program** | SAP Fiori Application Developer (2025-2026) |
 | **Repo Link** | https://github.com/rachitkumar2105/O2C-Fiori-App |
 
 ---
