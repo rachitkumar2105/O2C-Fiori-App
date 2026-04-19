@@ -1,0 +1,160 @@
+<mvc:View
+    controllerName="com.globaltrade.o2c.controller.InvoiceView"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout">
+
+    <Page title="Invoice Generation" showNavButton="true" navButtonPress=".onNavBack">
+        <customHeader>
+            <Bar>
+                <contentLeft>
+                    <Button icon="sap-icon://nav-back" press=".onNavBack"/>
+                    <Title text="Billing Document — Invoice Generation"/>
+                </contentLeft>
+                <contentRight>
+                    <Button text="🖨 Print Invoice" type="Default" press=".onPrint" class="sapUiSmallMarginEnd"/>
+                    <Button text="✅ Post Invoice" type="Emphasized" icon="sap-icon://accept" press=".onPostInvoice"/>
+                </contentRight>
+            </Bar>
+        </customHeader>
+
+        <content>
+            <!-- Invoice Header -->
+            <Panel class="sapUiMediumMargin">
+                <headerToolbar>
+                    <Toolbar>
+                        <Title text="INVOICE"/>
+                        <ToolbarSpacer/>
+                        <ObjectStatus id="invoiceStatus" text="Draft" state="Warning"/>
+                    </Toolbar>
+                </headerToolbar>
+
+                <l:HorizontalLayout allowWrapping="true" class="sapUiSmallMargin">
+                    <VBox class="sapUiMediumMarginEnd">
+                        <Label text="Invoice No."/>
+                        <ObjectIdentifier id="invoiceNo" title="INV-DRAFT"/>
+                    </VBox>
+                    <VBox class="sapUiMediumMarginEnd">
+                        <Label text="Invoice Date"/>
+                        <Text id="invoiceDate" text="20 Apr 2026"/>
+                    </VBox>
+                    <VBox class="sapUiMediumMarginEnd">
+                        <Label text="Sales Order Ref."/>
+                        <Text id="invoiceOrderRef" text="SO-1002"/>
+                    </VBox>
+                    <VBox>
+                        <Label text="Delivery Note Ref."/>
+                        <Text text="DN-2002"/>
+                    </VBox>
+                </l:HorizontalLayout>
+            </Panel>
+
+            <!-- Seller and Buyer -->
+            <l:HorizontalLayout allowWrapping="true" class="sapUiMediumMarginBegin sapUiMediumMarginEnd">
+                <Panel headerText="Seller (GlobalTrade Enterprises)" width="50%" class="sapUiSmallMarginEnd">
+                    <VBox class="sapUiSmallMargin">
+                        <Text text="GlobalTrade Enterprises" class="sapUiSmallMarginBottom"/>
+                        <Text text="Plot 12, MIDC Industrial Area"/>
+                        <Text text="Pune, Maharashtra — 411018"/>
+                        <Text text="GSTIN: 27AABCG1234K1Z5"/>
+                        <Text text="PAN: AABCG1234K"/>
+                    </VBox>
+                </Panel>
+                <Panel headerText="Bill To (Customer)" width="50%">
+                    <VBox class="sapUiSmallMargin">
+                        <Text id="billCustomer" text="Tata Steel Ltd." class="sapUiSmallMarginBottom"/>
+                        <Text text="Jamshedpur, Jharkhand — 831001"/>
+                        <Text text="GSTIN: 20AABCT1234K1Z3"/>
+                        <Text text="Customer ID: C-1002"/>
+                    </VBox>
+                </Panel>
+            </l:HorizontalLayout>
+
+            <!-- Line Items -->
+            <Panel headerText="Invoice Line Items" class="sapUiMediumMargin">
+                <Table>
+                    <columns>
+                        <Column><Text text="#"/></Column>
+                        <Column><Text text="Material"/></Column>
+                        <Column><Text text="HSN Code"/></Column>
+                        <Column><Text text="Qty"/></Column>
+                        <Column><Text text="Unit Price (INR)"/></Column>
+                        <Column><Text text="Amount (INR)"/></Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem>
+                            <cells>
+                                <Text text="1"/>
+                                <Text text="Hydraulic Press 50 Ton (GT-HYD-002)"/>
+                                <Text text="84629900"/>
+                                <Text text="1 EA"/>
+                                <ObjectNumber number="4,75,000" unit="INR"/>
+                                <ObjectNumber number="4,75,000" unit="INR"/>
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </Panel>
+
+            <!-- Tax and Total Summary -->
+            <Panel headerText="Tax Summary" class="sapUiMediumMargin">
+                <Table>
+                    <columns>
+                        <Column><Text text="Description"/></Column>
+                        <Column><Text text="Rate"/></Column>
+                        <Column><Text text="Amount (INR)"/></Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem>
+                            <cells>
+                                <Text text="Subtotal"/>
+                                <Text text="—"/>
+                                <ObjectNumber number="4,75,000" unit="INR"/>
+                            </cells>
+                        </ColumnListItem>
+                        <ColumnListItem>
+                            <cells>
+                                <Text text="Customer Discount"/>
+                                <Text text="0%"/>
+                                <ObjectNumber number="0" unit="INR"/>
+                            </cells>
+                        </ColumnListItem>
+                        <ColumnListItem>
+                            <cells>
+                                <Text text="Freight Charges (KF00)"/>
+                                <Text text="2%"/>
+                                <ObjectNumber number="9,500" unit="INR"/>
+                            </cells>
+                        </ColumnListItem>
+                        <ColumnListItem>
+                            <cells>
+                                <Text text="GST — IGST (MWST)"/>
+                                <Text text="18%"/>
+                                <ObjectNumber number="85,500" unit="INR"/>
+                            </cells>
+                        </ColumnListItem>
+                        <ColumnListItem>
+                            <cells>
+                                <Text text="TOTAL INVOICE VALUE" class="sapUiSmallMarginTop"/>
+                                <Text text=""/>
+                                <ObjectNumber number="5,70,000" unit="INR" emphasized="true"/>
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </Panel>
+
+            <!-- Amount in Words -->
+            <Panel class="sapUiMediumMargin">
+                <VBox class="sapUiSmallMargin">
+                    <Label text="Amount in Words:"/>
+                    <Text text="Five Lakhs Seventy Thousand Rupees Only"/>
+                    <Label text="Payment Terms:" class="sapUiTinyMarginTop"/>
+                    <Text text="Net 45 Days from Invoice Date"/>
+                    <Label text="Bank Details:" class="sapUiTinyMarginTop"/>
+                    <Text text="HDFC Bank | A/C: 50200012345678 | IFSC: HDFC0001234"/>
+                </VBox>
+            </Panel>
+        </content>
+    </Page>
+</mvc:View>

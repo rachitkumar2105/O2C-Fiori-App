@@ -1,0 +1,80 @@
+<mvc:View
+    controllerName="com.globaltrade.o2c.controller.SalesOrderList"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+
+    <Page title="Sales Order List" showNavButton="true" navButtonPress=".onNavBack">
+        <customHeader>
+            <Bar>
+                <contentLeft>
+                    <Button icon="sap-icon://nav-back" press=".onNavBack"/>
+                    <Title text="All Sales Orders"/>
+                </contentLeft>
+                <contentRight>
+                    <Button text="+ Create Order" type="Emphasized" press=".onCreateOrder"/>
+                    <SearchField width="200px" search=".onSearch" placeholder="Search orders..."/>
+                </contentRight>
+            </Bar>
+        </customHeader>
+
+        <content>
+            <!-- Filter Bar -->
+            <Toolbar class="sapUiSmallMargin">
+                <Label text="Filter by Status:"/>
+                <Select change=".onFilterChange">
+                    <items>
+                        <core:Item xmlns:core="sap.ui.core" key="All"         text="All"/>
+                        <core:Item xmlns:core="sap.ui.core" key="Open"        text="Open"/>
+                        <core:Item xmlns:core="sap.ui.core" key="In Delivery" text="In Delivery"/>
+                        <core:Item xmlns:core="sap.ui.core" key="Invoiced"    text="Invoiced"/>
+                        <core:Item xmlns:core="sap.ui.core" key="Completed"   text="Completed"/>
+                    </items>
+                </Select>
+                <ToolbarSpacer/>
+                <Text text="Total: {mock>/kpis/totalOrders} Orders"/>
+            </Toolbar>
+
+            <Table id="ordersTable" items="{mock>/salesOrders}" growing="true" growingThreshold="10">
+                <headerToolbar>
+                    <Toolbar>
+                        <Title text="Sales Orders — GlobalTrade Enterprises"/>
+                    </Toolbar>
+                </headerToolbar>
+                <columns>
+                    <Column width="10%"><Text text="Order ID"/></Column>
+                    <Column width="20%"><Text text="Customer"/></Column>
+                    <Column width="20%"><Text text="Material"/></Column>
+                    <Column width="8%"><Text text="Qty"/></Column>
+                    <Column width="12%"><Text text="Value (INR)"/></Column>
+                    <Column width="10%"><Text text="Date"/></Column>
+                    <Column width="10%"><Text text="Status"/></Column>
+                    <Column width="10%"><Text text="Delivery"/></Column>
+                    <Column width="10%"><Text text="Actions"/></Column>
+                </columns>
+                <items>
+                    <ColumnListItem press=".onOrderSelect" type="Navigation">
+                        <cells>
+                            <ObjectIdentifier title="{mock>orderId}"/>
+                            <Text text="{mock>customer}"/>
+                            <Text text="{mock>material}"/>
+                            <Text text="{mock>quantity}"/>
+                            <ObjectNumber number="{mock>price}" unit="INR"/>
+                            <Text text="{mock>date}"/>
+                            <ObjectStatus
+                                text="{mock>status}"
+                                state="{parts:[{path:'mock>status'}], formatter:'.formatStatus'}"/>
+                            <ObjectStatus
+                                text="{mock>delivery}"
+                                state="{parts:[{path:'mock>delivery'}], formatter:'.formatDelivery'}"/>
+                            <HBox>
+                                <Button icon="sap-icon://detail-view" tooltip="View Detail" press=".onOrderSelect" type="Transparent"/>
+                                <Button icon="sap-icon://shipping-status" tooltip="Track Delivery" press=".onTrackDelivery" type="Transparent"/>
+                                <Button icon="sap-icon://invoice" tooltip="Invoice" press=".onCreateInvoice" type="Transparent"/>
+                            </HBox>
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </content>
+    </Page>
+</mvc:View>

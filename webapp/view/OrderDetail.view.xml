@@ -1,0 +1,42 @@
+<mvc:View
+    controllerName="com.globaltrade.o2c.controller.OrderDetail"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout">
+
+    <Page showNavButton="true" navButtonPress=".onNavBack">
+        <customHeader>
+            <Bar>
+                <contentLeft>
+                    <Button icon="sap-icon://nav-back" press=".onNavBack"/>
+                    <Title id="pageTitle" text="Sales Order Detail"/>
+                </contentLeft>
+                <contentRight>
+                    <Button text="🚚 Track Delivery" type="Default" press=".onTrackDelivery" class="sapUiSmallMarginEnd"/>
+                    <Button text="🧾 Create Invoice" type="Emphasized" press=".onCreateInvoice"/>
+                </contentRight>
+            </Bar>
+        </customHeader>
+        <content>
+            <Panel headerText="Order Information" class="sapUiMediumMargin">
+                <l:HorizontalLayout allowWrapping="true" class="sapUiSmallMargin">
+                    <VBox class="sapUiMediumMarginEnd"><Label text="Order ID"/>      <ObjectIdentifier id="detOrderId"/></VBox>
+                    <VBox class="sapUiMediumMarginEnd"><Label text="Customer"/>      <Text id="detCustomer"/></VBox>
+                    <VBox class="sapUiMediumMarginEnd"><Label text="Material"/>      <Text id="detMaterial"/></VBox>
+                    <VBox class="sapUiMediumMarginEnd"><Label text="Quantity"/>      <Text id="detQty"/></VBox>
+                    <VBox class="sapUiMediumMarginEnd"><Label text="Value (INR)"/>   <ObjectNumber id="detPrice"/></VBox>
+                    <VBox class="sapUiMediumMarginEnd"><Label text="Order Date"/>    <Text id="detDate"/></VBox>
+                    <VBox class="sapUiMediumMarginEnd"><Label text="Status"/>        <ObjectStatus id="detStatus"/></VBox>
+                    <VBox>                              <Label text="Delivery"/>      <ObjectStatus id="detDelivery"/></VBox>
+                </l:HorizontalLayout>
+            </Panel>
+            <Panel headerText="O2C Process Status" class="sapUiMediumMargin">
+                <List>
+                    <StandardListItem title="Sales Order Created"     info="✅ Done" infoState="Success"      icon="sap-icon://sales-order"/>
+                    <StandardListItem id="delivStep" title="Delivery" info="⏳ Pending" infoState="Warning"  icon="sap-icon://shipping-status"/>
+                    <StandardListItem id="invoiceStep" title="Invoice" info="⏳ Pending" infoState="None"    icon="sap-icon://invoice"/>
+                </List>
+            </Panel>
+        </content>
+    </Page>
+</mvc:View>

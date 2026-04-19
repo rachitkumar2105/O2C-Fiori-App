@@ -1,0 +1,98 @@
+<mvc:View
+    controllerName="com.globaltrade.o2c.controller.CreateOrder"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form">
+
+    <Page title="Create Sales Order" showNavButton="true" navButtonPress=".onNavBack">
+        <customHeader>
+            <Bar>
+                <contentLeft>
+                    <Button icon="sap-icon://nav-back" press=".onNavBack"/>
+                    <Title text="New Sales Order — GlobalTrade Enterprises"/>
+                </contentLeft>
+                <contentRight>
+                    <Button text="Save Order" type="Emphasized" icon="sap-icon://save" press=".onSaveOrder"/>
+                    <Button text="Cancel" type="Default" press=".onNavBack"/>
+                </contentRight>
+            </Bar>
+        </customHeader>
+
+        <content>
+            <MessageStrip
+                id="msgStrip"
+                visible="false"
+                showCloseButton="true"
+                class="sapUiMediumMargin"/>
+
+            <f:SimpleForm
+                editable="true"
+                layout="ResponsiveGridLayout"
+                title="Sales Order Details"
+                labelSpanXL="3" labelSpanL="3" labelSpanM="4"
+                class="sapUiMediumMargin">
+                <f:content>
+                    <Label text="Order ID" required="false"/>
+                    <Input id="orderId" value="SO-AUTO" enabled="false"/>
+
+                    <Label text="Order Date" required="true"/>
+                    <DatePicker id="orderDate" value="{form>/orderDate}" valueFormat="yyyy-MM-dd" displayFormat="dd MMM yyyy"/>
+
+                    <Label text="Customer" required="true"/>
+                    <Select id="customerSelect" items="{mock>/customers}" change=".onCustomerSelect">
+                        <items>
+                            <core:Item xmlns:core="sap.ui.core" key="{mock>id}" text="{mock>name}"/>
+                        </items>
+                    </Select>
+
+                    <Label text="Material" required="true"/>
+                    <Select id="materialSelect" items="{mock>/materials}" change=".onMaterialSelect">
+                        <items>
+                            <core:Item xmlns:core="sap.ui.core" key="{mock>id}" text="{mock>name}"/>
+                        </items>
+                    </Select>
+
+                    <Label text="Quantity" required="true"/>
+                    <StepInput id="quantity" value="1" min="1" max="100" step="1" change=".onQtyChange"/>
+
+                    <Label text="Unit Price (INR)"/>
+                    <Input id="unitPrice" value="{form>/unitPrice}" enabled="false"/>
+
+                    <Label text="Discount (5% if > 10L)"/>
+                    <Input id="discount" value="{form>/discount}" enabled="false"/>
+
+                    <Label text="GST (18%)"/>
+                    <Input id="gst" value="{form>/gst}" enabled="false"/>
+
+                    <Label text="Total Value (INR)" required="false"/>
+                    <Input id="totalValue" value="{form>/totalValue}" enabled="false" class="sapUiSmallMarginBottom"/>
+
+                    <Label text="Delivery Date" required="true"/>
+                    <DatePicker id="deliveryDate" valueFormat="yyyy-MM-dd" displayFormat="dd MMM yyyy"/>
+
+                    <Label text="Remarks"/>
+                    <TextArea id="remarks" rows="3" placeholder="Optional remarks..."/>
+                </f:content>
+            </f:SimpleForm>
+
+            <!-- Order Summary Panel -->
+            <Panel id="summaryPanel" headerText="Order Summary" visible="false" class="sapUiMediumMargin">
+                <VBox class="sapUiSmallMargin">
+                    <HBox justifyContent="SpaceBetween">
+                        <Label text="Customer:"/>
+                        <Text id="summaryCustomer"/>
+                    </HBox>
+                    <HBox justifyContent="SpaceBetween" class="sapUiTinyMarginTop">
+                        <Label text="Material:"/>
+                        <Text id="summaryMaterial"/>
+                    </HBox>
+                    <HBox justifyContent="SpaceBetween" class="sapUiTinyMarginTop">
+                        <Label text="Total Value:"/>
+                        <Text id="summaryTotal"/>
+                    </HBox>
+                </VBox>
+            </Panel>
+        </content>
+    </Page>
+</mvc:View>

@@ -1,0 +1,124 @@
+<mvc:View
+    controllerName="com.globaltrade.o2c.controller.Home"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.f"
+    xmlns:card="sap.f.cards">
+
+    <Page title="GlobalTrade Enterprises — O2C Dashboard" showNavButton="false">
+        <customHeader>
+            <Bar>
+                <contentLeft>
+                    <Title text="🏭 GlobalTrade Enterprises" level="H2"/>
+                </contentLeft>
+                <contentRight>
+                    <Text text="Order-to-Cash Manager" class="sapUiSmallMarginEnd"/>
+                </contentRight>
+            </Bar>
+        </customHeader>
+
+        <content>
+            <!-- KPI Tiles -->
+            <Panel headerText="Dashboard Overview" expandable="false" class="sapUiMediumMargin">
+                <TileContainer id="kpiTiles">
+                    <StandardTile
+                        title="Total Orders"
+                        number="{mock>/kpis/totalOrders}"
+                        numberUnit="Orders"
+                        icon="sap-icon://sales-order"
+                        press=".onNavToOrders"/>
+                    <StandardTile
+                        title="Open Orders"
+                        number="{mock>/kpis/openOrders}"
+                        numberUnit="Pending"
+                        icon="sap-icon://pending"
+                        info="Action Required"
+                        infoState="Warning"
+                        press=".onNavToOrders"/>
+                    <StandardTile
+                        title="In Delivery"
+                        number="{mock>/kpis/inDelivery}"
+                        numberUnit="Shipments"
+                        icon="sap-icon://shipping-status"
+                        info="In Transit"
+                        infoState="Success"
+                        press=".onNavToOrders"/>
+                    <StandardTile
+                        title="Invoiced"
+                        number="{mock>/kpis/invoiced}"
+                        numberUnit="Completed"
+                        icon="sap-icon://invoice"
+                        info="Billed"
+                        infoState="Success"
+                        press=".onNavToOrders"/>
+                    <StandardTile
+                        title="Total Revenue"
+                        number="₹{mock>/kpis/totalRevenue}"
+                        numberUnit="INR"
+                        icon="sap-icon://money-bills"
+                        info="This Month"
+                        infoState="Success"/>
+                </TileContainer>
+            </Panel>
+
+            <!-- Quick Actions -->
+            <Panel headerText="Quick Actions" expandable="false" class="sapUiMediumMargin">
+                <l:HorizontalLayout allowWrapping="true">
+                    <Button
+                        text="➕ Create Sales Order"
+                        type="Emphasized"
+                        icon="sap-icon://add"
+                        press=".onCreateOrder"
+                        class="sapUiSmallMargin"/>
+                    <Button
+                        text="📋 View All Orders"
+                        type="Default"
+                        icon="sap-icon://list"
+                        press=".onNavToOrders"
+                        class="sapUiSmallMargin"/>
+                    <Button
+                        text="🚚 Delivery Tracker"
+                        type="Default"
+                        icon="sap-icon://shipping-status"
+                        press=".onNavToDelivery"
+                        class="sapUiSmallMargin"/>
+                    <Button
+                        text="🧾 Invoice Manager"
+                        type="Default"
+                        icon="sap-icon://invoice"
+                        press=".onNavToInvoice"
+                        class="sapUiSmallMargin"/>
+                </l:HorizontalLayout>
+            </Panel>
+
+            <!-- Recent Orders Table -->
+            <Panel headerText="Recent Sales Orders" expandable="false" class="sapUiMediumMargin">
+                <Table items="{mock>/salesOrders}">
+                    <columns>
+                        <Column><Text text="Order ID"/></Column>
+                        <Column><Text text="Customer"/></Column>
+                        <Column><Text text="Material"/></Column>
+                        <Column><Text text="Value (INR)"/></Column>
+                        <Column><Text text="Status"/></Column>
+                        <Column><Text text="Action"/></Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem press=".onOrderPress" type="Navigation">
+                            <cells>
+                                <ObjectIdentifier title="{mock>orderId}"/>
+                                <Text text="{mock>customer}"/>
+                                <Text text="{mock>material}"/>
+                                <ObjectNumber number="{mock>price}" unit="INR"/>
+                                <ObjectStatus
+                                    text="{mock>status}"
+                                    state="{parts: [{path: 'mock>status'}], formatter: '.formatStatus'}"/>
+                                <Button text="View" press=".onOrderPress" type="Transparent"/>
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </Panel>
+        </content>
+    </Page>
+</mvc:View>

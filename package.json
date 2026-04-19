@@ -1,0 +1,23 @@
+{
+  "name": "globaltrade-o2c-fiori",
+  "version": "1.0.0",
+  "description": "Order-to-Cash SAP Fiori Application for GlobalTrade Enterprises",
+  "author": "Student",
+  "license": "Unlicense",
+  "scripts": {
+    "start": "ui5 serve",
+    "build": "ui5 build --dest dist",
+    "test": "ui5 run test"
+  },
+  "devDependencies": {
+    "@ui5/cli": "^3.0.0",
+    "@sap/ux-ui5-tooling": "^1.0.0"
+  },
+  "dependencies": {
+    "@openui5/sap.f": "^1.108.0",
+    "@openui5/sap.m": "^1.108.0",
+    "@openui5/sap.ui.core": "^1.108.0",
+    "@openui5/sap.ui.layout": "^1.108.0",
+    "@openui5/sap.suite.ui.commons": "^1.108.0"
+  }
+}

@@ -1,0 +1,107 @@
+<mvc:View
+    controllerName="com.globaltrade.o2c.controller.DeliveryTracker"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout">
+
+    <Page title="Delivery Tracker" showNavButton="true" navButtonPress=".onNavBack">
+        <customHeader>
+            <Bar>
+                <contentLeft>
+                    <Button icon="sap-icon://nav-back" press=".onNavBack"/>
+                    <Title text="Delivery Tracker"/>
+                </contentLeft>
+                <contentRight>
+                    <Button text="Post Goods Issue" type="Emphasized" icon="sap-icon://complete" press=".onPostGoodsIssue"/>
+                </contentRight>
+            </Bar>
+        </customHeader>
+
+        <content>
+            <!-- Order Info -->
+            <Panel headerText="Sales Order Information" class="sapUiMediumMargin">
+                <l:HorizontalLayout allowWrapping="true" class="sapUiSmallMargin">
+                    <VBox class="sapUiSmallMarginEnd">
+                        <Label text="Order ID"/>
+                        <ObjectIdentifier id="delivOrderId" title="SO-1002"/>
+                    </VBox>
+                    <VBox class="sapUiSmallMarginEnd">
+                        <Label text="Customer"/>
+                        <Text id="delivCustomer" text="Tata Steel Ltd."/>
+                    </VBox>
+                    <VBox class="sapUiSmallMarginEnd">
+                        <Label text="Material"/>
+                        <Text id="delivMaterial" text="Hydraulic Press 50 Ton"/>
+                    </VBox>
+                    <VBox>
+                        <Label text="Quantity"/>
+                        <Text id="delivQty" text="1 EA"/>
+                    </VBox>
+                </l:HorizontalLayout>
+            </Panel>
+
+            <!-- Delivery Status Timeline -->
+            <Panel headerText="Delivery Status" class="sapUiMediumMargin">
+                <List>
+                    <StandardListItem
+                        title="✅ Sales Order Created"
+                        description="SO-1002 created on 05 Apr 2026"
+                        info="Completed"
+                        infoState="Success"
+                        icon="sap-icon://sales-order"/>
+                    <StandardListItem
+                        title="✅ Outbound Delivery Created"
+                        description="Delivery Note: DN-2002 generated"
+                        info="Completed"
+                        infoState="Success"
+                        icon="sap-icon://document"/>
+                    <StandardListItem
+                        title="✅ Picking Confirmed"
+                        description="Items picked from Pune Warehouse (MA01)"
+                        info="Completed"
+                        infoState="Success"
+                        icon="sap-icon://business-objects-experience"/>
+                    <StandardListItem
+                        title="🚚 Goods Issue Posted"
+                        description="Shipment dispatched from Pune Plant"
+                        info="In Transit"
+                        infoState="Warning"
+                        icon="sap-icon://shipping-status"/>
+                    <StandardListItem
+                        title="⏳ Delivered to Customer"
+                        description="Awaiting confirmation from Tata Steel Ltd."
+                        info="Pending"
+                        infoState="None"
+                        icon="sap-icon://home"/>
+                </List>
+            </Panel>
+
+            <!-- Shipment Details -->
+            <Panel headerText="Shipment Details" class="sapUiMediumMargin">
+                <l:HorizontalLayout allowWrapping="true" class="sapUiSmallMargin">
+                    <VBox class="sapUiMediumMarginEnd">
+                        <Label text="Delivery Note No."/><Text text="DN-2002"/>
+                    </VBox>
+                    <VBox class="sapUiMediumMarginEnd">
+                        <Label text="Shipping Point"/><Text text="GT01 — Pune Dispatch"/>
+                    </VBox>
+                    <VBox class="sapUiMediumMarginEnd">
+                        <Label text="Carrier"/><Text text="Blue Dart Logistics"/>
+                    </VBox>
+                    <VBox class="sapUiMediumMarginEnd">
+                        <Label text="Tracking No."/><Text text="BD-9876543210"/>
+                    </VBox>
+                    <VBox>
+                        <Label text="Expected Delivery"/><Text text="22 Apr 2026"/>
+                    </VBox>
+                </l:HorizontalLayout>
+            </Panel>
+
+            <!-- Action Buttons -->
+            <HBox justifyContent="Center" class="sapUiMediumMargin">
+                <Button text="✅ Confirm Delivery" type="Success" press=".onConfirmDelivery" class="sapUiSmallMarginEnd"/>
+                <Button text="🧾 Proceed to Invoice" type="Emphasized" press=".onProceedToInvoice"/>
+            </HBox>
+        </content>
+    </Page>
+</mvc:View>
